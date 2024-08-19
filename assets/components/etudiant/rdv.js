@@ -94,7 +94,11 @@ $(document).ready(function () {
             notyf.error(message);
         }
     })
-
+    let filterValue = "all";
+    $('.filter-radio').on('change', function () {
+        filterValue = $(this).val();
+        table.ajax.reload();
+    });
 
     var table = $("#list_rendezvous").DataTable({
         lengthMenu: [
@@ -106,7 +110,7 @@ $(document).ready(function () {
             url: Routing.generate("app_etudiant_rdv_listing_list"),
             type: "get",
             data: function (d) {
-                // You can add any additional data you want to send to the server here
+                d.filterDate = filterValue;
             },
             beforeSend: function (jqXHR) {
                 if (previousXhr) {
