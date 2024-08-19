@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+		<meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+		<title>RDVDentaire |&nbsp;
+			{% block title %}Welcome!
+			{% endblock %}
+		</title>
+		{% block stylesheets %}
+			{{ encore_entry_link_tags('app') }}
+		{% endblock %}
+		{% block javascripts %}
+			{{ encore_entry_script_tags('app') }}
+		{% endblock %}
+	</head>
+	<body>
+		<div
+			class="page">
+			<!-- Sidebar -->
+			{% include "inc/sidebar.html.twig" %}
+			<!-- Navbar -->
+			{% include "inc/navbar.html.twig" %}
+			<div
+				class="page-wrapper">
+				<!-- Page header -->
+				{% block pageHeader %}{% endblock %}
+				<!-- Page body -->
+				<div class="page-body">
+					<div class="container-xl"> {% block body %}{% endblock %}
+						</div>
+					</div>
+					<!-- Page Footer -->
+					{% include "inc/footer.html.twig" %}
+				</div>
+			</div>
+			<!-- changement de mot de passe -->
+			<div class="modal modal-blur fade" id="modal-changer-mdp" tabindex="-1" role="dialog" aria-hidden="true">
+				<div class="modal-dialog modal-sm" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title">Réinitialisation du mot de passe</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<form id="reset_form">
+								<div class="mb-3">
+									<label class="form-label">Ancien mot de passe</label>
+									<input type="password" class="form-control" name="old_password" placeholder="Ancien mot de passe" id="old_password" required>
+								</div>
+								<div class="mb-3">
+									<label class="form-label">Nouveau mot de passe</label>
+									<input type="password" class="form-control" name="nv_password" placeholder="Nouveau mot de passe" id="nv_password" required>
+								</div>
+							</form>
+						</div>
+						<div class="modal-footer">
+							<button class="btn btn-secondary" data-bs-dismiss="modal">
+								Annuler
+							</button>
+							<button id="btn-reset" form="reset_form" type="submit" class="btn btn-primary ms-auto">
+								<i class="fa-solid fa-rotate"></i>&nbsp;Réinitialiser
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</body>
+	</html>
+</body></html>

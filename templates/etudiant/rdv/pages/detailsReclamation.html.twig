@@ -1,0 +1,30 @@
+<div class="row row-cards">
+	<div class="col-md-6">
+		<label class="form-label">Nom Patient</label>
+		<input required name="nom" id="nom" type="text" class="form-control" placeholder="Nom" disabled>
+	</div>
+	<div class="col-md-6">
+		<label class="form-label">Prenom Patient</label>
+		<input required name="prenom" id="prenom" type="text" class="form-control" placeholder="Prenom" disabled>
+	</div>
+	<div class="col-md-6">
+		<label class="form-label">CIN Patient</label>
+		<input required name="cin" id="cin" type="text" class="form-control" placeholder="CIN" disabled>
+	</div>
+
+	<div class="col-md-6">
+		<label class="form-label">Date rendez-vous</label>
+		<input required name="date" id="date" type="datetime-local" class="form-control datepicker" disabled value="{{ rendezvous.date|date('Y-m-d\\TH:i') }}">
+	</div>
+	<div class="hr-text" style="margin: 20px 0 6px 0 !important;">List des actes</div>
+	<div class="col-md-12">
+		<ol style="padding-left: 3.5rem;padding-right: 3.5rem;">
+			{% for act in rendezvous.actes %}
+				<li>
+					{{act.designation}}
+				</li>
+			{% endfor %}
+		</ol>
+
+	</div>
+</div>
