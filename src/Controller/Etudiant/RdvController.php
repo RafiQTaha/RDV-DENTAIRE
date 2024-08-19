@@ -64,6 +64,14 @@ class RdvController extends AbstractController
                 ->setParameter('search', "%$search%");
         }
 
+        $dateFilter = $request->query->get('filterDate');
+        if ($dateFilter != "all") {
+            $date = (new \DateTime($dateFilter))->format('Y-m-d');
+            // dd($date);
+            $queryBuilder->andWhere('r.date LIKE :date')
+                ->setParameter('date', $date . '%');
+        }
+
         if (!empty($orderColumn)) {
             $queryBuilder->orderBy("$orderColumn", $orderDir);
         }
