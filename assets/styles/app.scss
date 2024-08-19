@@ -1,0 +1,268 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+
+* {
+  font-size: 13px !important;
+  font-family: "JetBrains Mono", monospace;
+  letter-spacing: -1px !important;
+}
+
+body>* {
+  text-transform: uppercase !important;
+}
+
+.navbar-vertical.navbar-expand-lg {
+  width: 16rem !important;
+}
+
+.container-xl {
+  max-width: 99.2% !important;
+  margin: 0px 10px !important;
+}
+
+.table-responsive {
+  overflow: hidden;
+}
+
+.dt-container {
+  padding: 10px;
+}
+
+.dt-length>* {
+  font-size: 10px !important;
+}
+
+.dt-search>* {
+  font-size: 10px !important;
+}
+
+.dt-info {
+  font-size: 10px !important;
+}
+
+.pagination * {
+  font-size: 10px !important;
+}
+
+.dataTable thead tr th {
+  background-color: #e6ebf0;
+}
+
+.dataTable * {
+  font-size: 10px !important;
+}
+
+.dataTable td,
+th {
+  padding: 5px;
+  text-align: center;
+}
+
+.dataTable td,
+th {
+  padding: 5px;
+  text-align: center;
+}
+
+.actions .dropdown-item:hover {
+  background: rgb(210, 210, 210);
+}
+
+.dt-paging-button {
+  font-size: 10px !important;
+}
+
+.processing {
+  position: absolute;
+  // top: 200%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  // background-color: rgba(161, 161, 161, 0.607);
+  padding: 15px;
+  // border-radius: 5px;
+}
+
+.spinner-border {
+  color: #e6ebf0 !important;
+}
+
+.toggleFilterRow,
+.removeFilters {
+  border: none;
+  background: none;
+  padding: 0;
+}
+
+.removeAct {
+  border: none;
+  background: none;
+  padding: 0;
+}
+
+// for users table admin
+#list_users .select2-selection__rendered {
+  width: 80px;
+}
+
+.btn {
+  text-transform: uppercase !important;
+}
+
+.navbar-vertical.navbar-expand-lg .navbar-collapse .dropdown-menu .dropdown-item.active,
+.navbar-vertical.navbar-expand-lg .navbar-collapse .dropdown-menu .dropdown-item:active {
+  color: #FFF;
+}
+
+
+// sidebar toggle
+.navbar-toggler {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  padding: 0;
+}
+
+.line {
+  fill: none;
+  stroke: #fff;
+  stroke-width: 6;
+  transition: stroke-dasharray 600ms cubic-bezier(0.4, 0, 0.2, 1),
+    stroke-dashoffset 600ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.line1 {
+  stroke-dasharray: 60 207;
+  stroke-width: 6;
+}
+
+.line2 {
+  stroke-dasharray: 60 60;
+  stroke-width: 6;
+}
+
+.line3 {
+  stroke-dasharray: 60 207;
+  stroke-width: 6;
+}
+
+.opened .line1 {
+  stroke-dasharray: 90 207;
+  stroke-dashoffset: -134;
+  stroke-width: 6;
+}
+
+.opened .line2 {
+  stroke-dasharray: 1 60;
+  stroke-dashoffset: -30;
+  stroke-width: 6;
+}
+
+.opened .line3 {
+  stroke-dasharray: 90 207;
+  stroke-dashoffset: -134;
+  stroke-width: 6;
+}
+
+.btn-logout {
+  display: none;
+}
+
+@media only screen and (max-width: 992px) {
+  .navbar-vertical.navbar-expand-lg {
+    width: 102% !important;
+  }
+
+  .btn-logout {
+    display: block;
+    padding-right: 15px;
+    color: #fff
+  }
+}
+
+
+/* MODAL FADE LEFT RIGHT BOTTOM */
+.modal-dialog {
+  max-width: 50%;
+}
+
+.modal-dialog-slideout {
+  min-height: 100%;
+  margin: 0 0 0 auto;
+  background: #fff;
+}
+
+.modal.fade .modal-dialog.modal-dialog-slideout {
+  -webkit-transform: translate(100%, 0)scale(1);
+  transform: translate(100%, 0)scale(1);
+}
+
+.modal.fade.show .modal-dialog.modal-dialog-slideout {
+  -webkit-transform: translate(0, 0);
+  transform: translate(0, 0);
+  display: flex;
+  align-items: stretch;
+  -webkit-box-align: stretch;
+  height: 100%;
+}
+
+.modal.fade.show .modal-dialog.modal-dialog-slideout .modal-body {
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.modal-dialog-slideout .modal-content {
+  border: 0;
+}
+
+// filepond
+.filepond--drop-label {
+  color: #4c4e53;
+}
+
+.filepond--label-action {
+  text-decoration-color: #babdc0;
+}
+
+.filepond--panel-root {
+  border-radius: .5em;
+  background-color: #edf0f4;
+  height: 1em;
+}
+
+.filepond--item-panel {
+  background-color: #595e68;
+}
+
+.filepond--drip-blob {
+  background-color: #7f8a9a;
+}
+
+.filepond--root .filepond--credits[style] {
+  display: none;
+}
+
+// display files 
+.file-block {
+  display: flex;
+  color: #f7fff7;
+  background-color: #717b99;
+  transition: all 0.5s;
+  position: relative;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  border-radius: 3px;
+  cursor: pointer;
+  margin-bottom: 4px;
+}
+
+.file-block i {
+  font-size: 30px !important;
+  color: white;
+  transition: all 0.5s;
+}
+
+.file-block:hover i {
+  transform: scale(1.2);
+}
