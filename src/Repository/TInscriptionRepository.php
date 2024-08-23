@@ -33,9 +33,9 @@ class TInscriptionRepository extends ServiceEntityRepository
         ;
         // dd($return);
     }
-    
 
-    public function getNiveauByPromoAnnee($promotion,$annee)
+
+    public function getNiveauByPromoAnnee($promotion, $annee)
     {
         return $this->createQueryBuilder('inscription')
             ->Where("inscription.promotion = :promotion")
@@ -48,7 +48,27 @@ class TInscriptionRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult()
         ;
+    }
 
-    } 
+    public function getInscriptionWithRdvByDates($startDate, $endDate)
+    {
+        $qb = $this->createQueryBuilder('i')
+            ->join('i.rendezvouses', 'r')
+            ->addSelect('r');
 
+        if ($startDate && !$endDate) {
+            $qb->andWhere('r.date LIKE :startDate')
+                ->setParameter('startDate', $startDate->format('Y-m-d') . '%');
+        } elseif (!$startDate && $endDate) {
+            $qb->andWhere('r.date LIKE :endDate')
+                ->setParameter('endDate', $endDate->format('Y-m-d') . '%');
+        } elseif ($startDate && $endDate) {
+            $endDate->modify('+1 day');
+            $qb->andWhere('r.date BETWEEN :startDate AND :endDate')
+                ->setParameter('startDate', $startDate->format('Y-m-d') . ' 00:00:00')
+                ->setParameter('endDate', $endDate->format('Y-m-d') . ' 00:00:00');
+        }
+        $qb->andWhere('r.Annuler == 0');
+        return $qb->getQuery()->getResult();
+    }
 }

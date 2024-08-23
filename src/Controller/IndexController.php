@@ -19,7 +19,7 @@ class IndexController extends AbstractController
     public function index()
     {
         if ($this->security->isGranted('ROLE_ADMIN')) {
-            return $this->redirectToRoute('app_admin_index');
+            return $this->redirectToRoute('app_admin_rdv_listing');
         }
         if ($this->security->isGranted('ROLE_ETUDIANT')) {
             return $this->redirectToRoute('app_etudiant_rdv_listing');

@@ -8,7 +8,6 @@ use App\Entity\User;
 use App\Entity\Rendezvous;
 use App\Entity\TAdmission;
 use App\Entity\TInscription;
-use App\Service\UserActivityLogger;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -35,7 +34,7 @@ class RdvController extends AbstractController
         ]);
     }
     #[Route('/list', name: 'app_etudiant_rdv_listing_list', options: ['expose' => true])]
-    public function app_admin_user_list(Request $request): Response
+    public function app_admin_rdv_listing_list(Request $request): Response
     {
         $admission = $this->em->getRepository(TAdmission::class)->findOneBy(['code' => $this->getUser()->getUsername()]);
         $inscription = $this->em->getRepository(TInscription::class)->findOneBy(['admission' => $admission, "statut" => 13], ["id" => "desc"]);
@@ -57,6 +56,7 @@ class RdvController extends AbstractController
             ->from(Rendezvous::class, 'r')
             ->leftJoin('r.Actes', 'a')
             ->where('r.inscription = :inscription')
+            ->andWhere('r.Annuler = 0')
             ->setParameter('inscription', $inscription)
             ->groupBy('r.id');
         if (!empty($search)) {
@@ -108,6 +108,7 @@ class RdvController extends AbstractController
             ->select('COUNT(r.id)')
             ->from(Rendezvous::class, 'r')
             ->where('r.inscription = :inscription')
+            ->andWhere('r.Annuler = 0')
             ->setParameter('inscription', $inscription)
             // ->innerJoin('u.client', 'c')
             ->getQuery()
@@ -171,5 +172,15 @@ class RdvController extends AbstractController
             'rendezvous' => $rendezvous
         ])->getContent();
         return new JsonResponse(['detailsRdv' => $detailsRdv], 200);
+    }
+
+    #[Route('/annuler', name: 'app_etudiant_rdv_listing_annuler', options: ['expose' => true])]
+    public function app_etudiant_rdv_listing_annuler(Request $request): Response
+    {
+        $rendezvous = $this->em->getRepository(Rendezvous::class)->find($request->request->get('rendezvous'));
+        $rendezvous->setAnnuler(1);
+        $rendezvous->setAnnulated(new DateTime('now'));
+        $this->em->flush();
+        return new JsonResponse("Rendez-vous annulé avec succès.", 200);
     }
 }

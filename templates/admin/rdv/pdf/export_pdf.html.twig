@@ -1,0 +1,262 @@
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap" rel="stylesheet">
+
+<style type="text/Css">
+	body{
+		font-family: "JetBrains Mono", monospace;
+  		letter-spacing: -1px !important;
+		text-transform: uppercase !important;
+	}
+	.footer_style {
+		position: relative;
+		left: 5%;width:90%;
+		padding:0px 5px ;
+		text-align: center;
+		font-size: 9px;
+		line-height:14px
+	}
+	.titre-reb{
+		width: 100%;
+		background: #1f4f7a;
+		font-size: 9px ;
+		padding:3px 10px;
+		color: #f1f1f1;
+		font-weight: bold
+	}
+	div.zone_over
+	{
+		display: block;
+		width: 40%;
+		
+	}
+	.slh tr td {
+		border-bottom: 1px solid #bdc3c7;
+	}
+
+
+
+
+	.head-file p{
+		font-size: 10px;
+		width: 100%;
+		margin: 3px 0px 3px 5px;
+	}
+	.head-file b{
+
+	}
+	h2{
+		font-size: 13px; 
+		margin: 5px
+	}
+
+</style>
+{% for inscription in inscriptions %}
+<br><br><br><br><br>
+<table style="width: 100%; text-align: left; font-size: 9px !important; margin-left: 10px;background: #bdc3c7 ;">
+    <tr>
+        <td style="width: 100% ;padding: 4px; font-weight: bold;font-size: 10px; color: #2c3e50;">INFORMATION ETUDIANT</td> 
+    </tr>
+</table>
+<table style="width: 100%; text-align: left; font-size: 9px; margin-left: 10px;">
+    <tr style="width: 100%;"> 
+        <td style="width: 50% ;">
+            <table style="width: 100% ;">
+                <tr>
+                    
+                    <td style="width: 35% ;border: none;background: #ecf0f1;color:#2c3e50;border: 0.5px solid #bdc3c7">
+                        <table style="width: 100% ; ">
+                            <tr><td style="width: 100%"><b>NOM  </b></td></tr>
+                        </table>
+                    </td>
+                    <td style="width: 35%;border: 0.5px solid #bdc3c7">
+                        <table style="width: 100% ;">
+                            <tr><td style="width: 100%">{{inscription.admission.preinscription.etudiant.nom}}</td></tr>
+                        </table>
+                    </td>
+                    
+                   
+
+
+                  <td style="width: 35% ;border: none;background: #ecf0f1;color:#2c3e50;border: 0.5px solid #bdc3c7">
+                        <table style="width: 100% ; ">
+                            <tr><td style="width: 100%"><b>CODE INSCRIPTION </b></td></tr>
+                        </table>
+                    </td>
+                    
+                    <td style="width: 35%;border: 0.5px solid #bdc3c7">
+                        <table style="width: 100% ;">
+                            <tr><td style="width: 100%">{{inscription.code}}</td></tr>
+                        </table>
+                    </td>
+
+                   
+                </tr>
+
+                <tr>
+                    
+                    
+                    
+                    <td style="width: 35% ;border: none;background: #ecf0f1;color:#2c3e50;border: 0.5px solid #bdc3c7">
+                        <table style="width: 100% ; ">
+                            <tr>
+                                <td style="width: 100%"><b>PRENOM </b></td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td style="width: 35%;border: 0.5px solid #bdc3c7">
+                        <table style="width: 100% ;">
+                            <tr>
+                                <td style="width: 100%">{{inscription.admission.preinscription.etudiant.prenom}}</td>
+                            </tr>
+                        </table>
+                    </td>
+                    
+                    
+                    
+                     <td style="width: 35% ;border: none;background: #ecf0f1;color:#2c3e50;border: 0.5px solid #bdc3c7">
+                        <table style="width: 40% ; ">
+                            <tr><td style="width: 100%"><b>ETABLISSEMENT </b></td></tr>
+                        </table>
+                    </td>
+                    <td style="width: 35%;border: 0.5px solid #bdc3c7">
+                        <table style="width: 100% ;">
+                            <tr><td style="width: 100%">{{inscription.annee.formation.etablissement.designation}}</td></tr>
+                        </table>
+                    </td>
+                    
+                    
+                    
+
+                 
+
+
+                </tr>
+                <tr>
+                    
+                     <td style="width: 35% ;border: none;background: #ecf0f1;color:#2c3e50;border: 0.5px solid #bdc3c7">
+                        <table style="width: 100% ; ">
+                            <tr><td style="width: 100%"><b>CODE ETUDIANT</b></td></tr>
+                        </table>
+                    </td>
+                    
+                    <td style="width: 35%;border: 0.5px solid #bdc3c7">
+                        <table style="width: 100% ;">
+                            <tr><td style="width: 100%">{{inscription.admission.preinscription.etudiant.code}}</td></tr>
+                        </table>
+                    </td>
+                    
+                    
+                       <td style="width: 35% ;border: none;background: #ecf0f1;color:#2c3e50;border: 0.5px solid #bdc3c7">
+                        <table style="width: 100% ; ">
+                            <tr>
+                                <td style="width: 100%"><b>FORMATION  </b></td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td style="width: 35%;border: 0.5px solid #bdc3c7">
+                        <table style="width: 100% ;">
+                            <tr>
+                            {# {% set inss = ['INS-CSM2c3e5008389/2019','INS-CSM2c3e5008375/2019','INS-CSM2c3e5008388/2019','INS-CSM2c3e5008385/2019','INS-CSM2c3e5008378/2019','INS-CSM2c3e5006037/2019'] %} #}
+                            {% set adms = [2534] %}
+                            {% if inscription.admission.id in adms %}
+                                <td style="width: 100%">DU Génie de la Santé</td>
+                            {% elseif inscription.annee.formation.id in [46,63] %}
+                                {% if inscription.annee.formation.etabSec %}
+                                    <td style="width: 100%">{{inscription.annee.formation.etabSec.designation}}</td>
+                                {% else %}
+                                    <td style="width: 100%">{{inscription.annee.formation.designation}}</td>
+                                {% endif %}
+                            {% else %}
+                                <td style="width: 100%">{{inscription.annee.formation.designation}}</td>
+                            {% endif %}
+                            </tr>
+                        </table>
+                    </td>
+
+                </tr>
+                
+                
+                 <tr>
+                    <td style="width: 35% ;border: none;background: #ecf0f1;color:#2c3e50;border: 0.5px solid #bdc3c7">
+                        <table style="width: 100% ; ">
+                            <tr>
+                                <td style="width: 100%"><b>CODE ADMISSION  </b></td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td style="width: 35%;border: 0.5px solid #bdc3c7">
+                        <table style="width: 100% ;">
+                            <tr>
+                                <td style="width: 100%">{{inscription.admission.code}}</td>
+                            </tr>
+                        </table>
+                    </td>
+
+                    
+                    
+                     <td style="width: 35% ;border: none;background: #ecf0f1;color:#2c3e50;border: 0.5px solid #bdc3c7">
+                        <table style="width: 100% ; ">
+                            <tr>
+                                <td style="width: 100%"><b>PROMOTION  </b></td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td style="width: 35%;border: 0.5px solid #bdc3c7">
+                        <table style="width: 100% ;">
+                            <tr>
+                                <td style="width: 100%">{{inscription.promotion.designation}}</td>
+                            </tr>
+                        </table>
+                    </td>
+                    
+                </tr>
+                
+                
+                
+                
+
+            </table>
+        </td>
+    </tr>   
+</table>
+<table style="width: 100%; text-align: left; font-size: 9px !important; margin-left: 10px;margin-top:5px;background: #bdc3c7 ;">
+    <tr>
+        <td style="width: 100% ;padding: 4px; font-weight: bold;font-size: 10px; color: #2c3e50;">LIST RENDEZ-VOUS</td> 
+    </tr>
+</table>
+
+<table style="width: 100%; text-align: center; font-size: 9px; margin-left: 10px;margin-top: 5px;padding:0 5px" cellspacing="0">
+	<thead>
+		<tr>
+			<th style="width: 3% ;border: none;background: #ecf0f1;color:#2c3e50;border: 0.5px solid #bdc3c7">ORD</th>
+			<th style="width: 10% ;border: none;background: #ecf0f1;color:#2c3e50;border: 0.5px solid #bdc3c7">CODE</th>
+			<th style="width: 10% ;border: none;background: #ecf0f1;color:#2c3e50;border: 0.5px solid #bdc3c7">NOM</th>
+			<th style="width: 10% ;border: none;background: #ecf0f1;color:#2c3e50;border: 0.5px solid #bdc3c7">PRENOM</th>
+			<th style="width: 10% ;border: none;background: #ecf0f1;color:#2c3e50;border: 0.5px solid #bdc3c7">CIN</th>
+			<th style="width: 30% ;border: none;background: #ecf0f1;color:#2c3e50;border: 0.5px solid #bdc3c7">ACT</th>
+			<th style="width: 15% ;border: none;background: #ecf0f1;color:#2c3e50;border: 0.5px solid #bdc3c7">DATE RENDEZ-VOUS</th>
+			<th style="width: 15% ;border: none;background: #ecf0f1;color:#2c3e50;border: 0.5px solid #bdc3c7">DATE CREATION</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% set ord = 1 %}
+		{% for rdv in inscription.rendezvouses %}
+			{% for act in rdv.actes %}
+				<tr>
+					<td style="padding: 3px;font-size: 9px;text-align: center;font-weight: 800 !important;border: 0.5px solid #bdc3c7; {% if loop.index is even %}background:#ecf0f1{% endif %}">{{ord}}</td>
+					<td style="padding: 3px;font-size: 9px;text-align: center;font-weight: 800 !important;border: 0.5px solid #bdc3c7; {% if loop.index is even %}background:#ecf0f1{% endif %}">{{rdv.code}}</td>
+					<td style="padding: 3px;font-size: 9px;text-align: center;font-weight: 800 !important;border: 0.5px solid #bdc3c7; {% if loop.index is even %}background:#ecf0f1{% endif %}">{{rdv.nom}}</td>
+					<td style="padding: 3px;font-size: 9px;text-align: center;font-weight: 800 !important;border: 0.5px solid #bdc3c7; {% if loop.index is even %}background:#ecf0f1{% endif %}">{{rdv.prenom}}</td>
+					<td style="padding: 3px;font-size: 9px;text-align: center;font-weight: 800 !important;border: 0.5px solid #bdc3c7; {% if loop.index is even %}background:#ecf0f1{% endif %}">{{rdv.cin}}</td>
+					<td style="padding: 3px;font-size: 9px;text-align: center;font-weight: 800 !important;border: 0.5px solid #bdc3c7; {% if loop.index is even %}background:#ecf0f1{% endif %}">{{act.designation}}</td>
+					<td style="padding: 3px;font-size: 9px;text-align: center;font-weight: 800 !important;border: 0.5px solid #bdc3c7; {% if loop.index is even %}background:#ecf0f1{% endif %}">{{rdv.date|date("Y-m-d h:i")}}</td>
+					<td style="padding: 3px;font-size: 9px;text-align: center;font-weight: 800 !important;border: 0.5px solid #bdc3c7; {% if loop.index is even %}background:#ecf0f1{% endif %}">{{rdv.created|date("Y-m-d h:i")}}</td>
+				</tr>
+				{% set ord = ord + 1 %}
+			{% endfor %}
+		{% endfor %}
+	</tbody>
+</table>
+<br><br>
+<pagebreak>
+{% endfor %}
+

@@ -1,0 +1,27 @@
+<div class="modal fade" id="export_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+	<div class="modal-dialog modal-sm  modal-dialog-export" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title align-right" id="exampleModalLabel">Détails Rendez-vous</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<div class="col-md-12">
+					<label class="form-label">Periode:
+					</label>
+					<input name="dateDebut" id="dateDebut" type="date" class="form-control">
+					<br>
+					<input name="dateFin" id="dateFin" type="date" class="form-control">
+				</div>
+			</div>
+			<div class="modal-footer p-2" style="justify-content: left">
+				<div class="text-center p-2" style="display: flex;justify-content: space-between; width: 100%;">
+					<button id="exportExcel" class="btn btn-success">
+						<i class="fa-solid fa-file-excel"></i>&nbsp; Exporter Excel</button>
+					<button id="exportPDF" class="btn btn-danger">
+						<i class="fa-solid fa-file-pdf"></i>&nbsp; Exporter PDF</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

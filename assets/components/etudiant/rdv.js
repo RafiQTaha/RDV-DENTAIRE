@@ -105,7 +105,7 @@ $(document).ready(function () {
             [10, 15, 25, 50, 100, 20000000000000],
             [10, 15, 25, 50, 100, "All"],
         ],
-        order: [[0, "desc"]],
+        order: [[0, "asc"]],
         ajax: {
             url: Routing.generate("app_etudiant_rdv_listing_list"),
             type: "get",
@@ -176,6 +176,7 @@ $(document).ready(function () {
                             </svg>
                             <div class="actions dropdown-menu dashboard-dropdown dropdown-menu-center mt-2 py-1">
                                 <a href="#" data-id="${full.id}" class="dropdown-item detailsRdv"><i class="fa fa-eye"></i>&nbsp; Détails</a>
+                                <a href="#" data-id="${full.id}" class="dropdown-item annulerRdv"><i class="fa-solid fa-xmark"></i>&nbsp; Annuler</a>
                             </div>
                         </div>
                     `;
@@ -183,6 +184,15 @@ $(document).ready(function () {
             },
         ],
         language: datatablesFrench,
+        createdRow: function (row, data, dataIndex) {
+
+            var date = window.moment(data.date.date); // Adjust format if needed
+            var now = window.moment();
+
+            if (date.isBefore(now)) {
+                $(row).addClass('date-passed');
+            }
+        },
         initComplete: function () {
             // Prevent sorting when interacting with select in header
             $("thead .selection").on("click", function (e) {
@@ -215,6 +225,53 @@ $(document).ready(function () {
                 window.notyf.error('Something went wrong!');
             }
         }
+    })
+
+    $('body').on('click', '.annulerRdv', async function (e) {
+        e.preventDefault();
+        let id_rdv = $(this).attr('data-id');
+        swalWithBootstrapButtons.fire({
+            showClass: {
+                popup: 'animatedSwal flipInX faster'
+            },
+            position: 'top',
+            title: "Confirmation ?",
+            text: "Voulez vous vraiment Annuler ce rendez-vous ?",
+            type: "warning",
+            showCancelButton: true,
+            focusConfirm: true,
+            showCloseButton: true,
+            confirmButtonText: "<i class='fa fa-check'></i> Oui!",
+            cancelButtonText: "<i class='fa fa-times'></i> Non, Annuler!",
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                window.notyf.open({
+                    type: "info",
+                    message: "En cours...",
+                    duration: 9000000,
+                    dismissible: false
+                });
+
+                var formData = new FormData();
+                formData.append('rendezvous', id_rdv);
+                try {
+                    const request = await axios.post(Routing.generate('app_etudiant_rdv_listing_annuler'), formData);
+                    const response = request.data;
+
+                    window.notyf.dismissAll();
+                    window.notyf.success(response);
+                    table.ajax.reload()
+
+                } catch (error) {
+                    // icon.addClass('fa-unlock').removeClass("fa-spinner fa-spin ");
+                    console.log(error);
+                    const message = error.response.data;
+                    window.notyf.dismissAll();
+                    window.notyf.error(message);
+                }
+
+            }
+        })
     })
 
 });

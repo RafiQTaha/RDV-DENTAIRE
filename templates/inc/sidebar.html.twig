@@ -8,10 +8,10 @@
 			</svg>
 		</button>
 		<h1 class="navbar-brand navbar-brand-autodark">
-			<a
-				href="{{path('app_index')}}">
-				{# <img src="{{asset('static/logo.svg')}}" width="110" height="32" alt="Tabler" class="navbar-brand-image"> #}
-				RDVDENTAIRE
+			<a href="{{path('app_index')}}">
+				<div style="text-align: center;">
+					<img src="{{asset('static/logo_black.png')}}" style=" width: 150px; margin: 0 auto;filter: invert(1);">
+				</div>
 			</a>
 		</h1>
 		<a href="{{path('app_logout')}}" class="btn-logout">
@@ -30,50 +30,6 @@
 					{% set CurrentUrl1 = pathSegments[1] ?? '' %}
 					{% set CurrentUrl2 = pathSegments[2] ?? '' %}
 					{% set CurrentUrl3 = pathSegments[3] ?? '' %}
-					<li class="nav-item {% if CurrentUrl2 == 'dashboard' %} active {% endif %}">
-						<a class="nav-link {% if CurrentUrl2 == 'dashboard' %} show {% endif %}" href="./">
-							<span
-								class="nav-link-icon d-md-none d-lg-inline-block">
-								<!-- Download SVG icon from http://tabler-icons.io/i/home -->
-								<svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewbox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-									<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-									<path d="M5 12l-2 0l9 -9l9 9l-2 0"></path>
-									<path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7"></path>
-									<path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6"></path>
-								</svg>
-							</span>
-							<span class="nav-link-title">
-								TABLEAU DE BORD
-							</span>
-						</a>
-					</li>
-					<li class="nav-item dropdown {% if CurrentUrl2 == 'parametrage' %} active {% endif %}">
-						<a class="nav-link dropdown-toggle {% if CurrentUrl2 == 'parametrage' %} show {% endif %}" href="#navbar-base" data-bs-toggle="dropdown" data-bs-auto-close="false" role="button" {% if CurrentUrl2 == 'parametrage' %} aria-expanded="true" {% endif %}>
-							<span
-								class="nav-link-icon d-md-none d-lg-inline-block">
-								<!-- Download SVG icon from http://tabler-icons.io/i/package -->
-								<svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewbox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 3l8 4.5l0 9l-8 4.5l-8 -4.5l0 -9l8 -4.5"/><path d="M12 12l8 -4.5"/><path d="M12 12l0 9"/><path d="M12 12l-8 -4.5"/><path d="M16 5.25l-8 4.5"/></svg>
-							</span>
-							<span class="nav-link-title">
-								Paramétrage
-							</span>
-						</a>
-						<div class="dropdown-menu {% if CurrentUrl2 == 'parametrage' %} show {% endif %}">
-							<div class="dropdown-menu-columns">
-								<div class="dropdown-menu-column">
-									<a class="dropdown-item {% if CurrentUrl2 == 'parametrage' and CurrentUrl3 == 'synchronisation' %} active {% endif %}" href="{{path('app_admin_synchronisation')}}">
-										Synchronisation
-									</a>
-								</div>
-							</div>
-						</div>
-					</li>
-				{% endif %}
-				{% if is_granted('ROLE_ETUDIANT') %}
-					{% set pathSegments = app.request.pathinfo|split('/') %}
-					{% set CurrentUrl1 = pathSegments[1] ?? '' %}
-					{% set CurrentUrl2 = pathSegments[2] ?? '' %}
-					{% set CurrentUrl3 = pathSegments[3] ?? '' %}
 					<li class="nav-item dropdown {% if CurrentUrl2 == 'rendez-vous' %} active {% endif %}">
 						<a class="nav-link dropdown-toggle {% if CurrentUrl2 == 'rendez-vous' %} show {% endif %}" href="#navbar-base" data-bs-toggle="dropdown" data-bs-auto-close="false" role="button" {% if CurrentUrl2 == 'rendez-vous' %} aria-expanded="true" {% endif %}>
 							<span
@@ -88,15 +44,63 @@
 						<div class="dropdown-menu {% if CurrentUrl2 == 'rendez-vous' %} show {% endif %}">
 							<div class="dropdown-menu-columns">
 								<div class="dropdown-menu-column">
-									<a class="dropdown-item {% if CurrentUrl2 == 'rendez-vous' and CurrentUrl3 == 'listing' %} active {% endif %}" href="{{path('app_etudiant_rdv_listing')}}">
+									<a class="dropdown-item {% if CurrentUrl2 == 'rendez-vous' and CurrentUrl3 == 'listing' %} active {% endif %}" href="{{path('app_admin_rdv_listing')}}">
 										Listing
 									</a>
 								</div>
 							</div>
 						</div>
 					</li>
-				{% endif %}
-			</ul>
-		</div>
+				</li>
+				<li class="nav-item dropdown {% if CurrentUrl2 == 'parametrage' %} active {% endif %}">
+					<a class="nav-link dropdown-toggle {% if CurrentUrl2 == 'parametrage' %} show {% endif %}" href="#navbar-base" data-bs-toggle="dropdown" data-bs-auto-close="false" role="button" {% if CurrentUrl2 == 'parametrage' %} aria-expanded="true" {% endif %}>
+						<span
+							class="nav-link-icon d-md-none d-lg-inline-block">
+							<!-- Download SVG icon from http://tabler-icons.io/i/package -->
+							<svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewbox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 3l8 4.5l0 9l-8 4.5l-8 -4.5l0 -9l8 -4.5"/><path d="M12 12l8 -4.5"/><path d="M12 12l0 9"/><path d="M12 12l-8 -4.5"/><path d="M16 5.25l-8 4.5"/></svg>
+						</span>
+						<span class="nav-link-title">
+							Paramétrage
+						</span>
+					</a>
+					<div class="dropdown-menu {% if CurrentUrl2 == 'parametrage' %} show {% endif %}">
+						<div class="dropdown-menu-columns">
+							<div class="dropdown-menu-column">
+								<a class="dropdown-item {% if CurrentUrl2 == 'parametrage' and CurrentUrl3 == 'synchronisation' %} active {% endif %}" href="{{path('app_admin_synchronisation')}}">
+									Synchronisation
+								</a>
+							</div>
+						</div>
+					</div>
+				</li>
+			{% endif %}
+			{% if is_granted('ROLE_ETUDIANT') %}
+				{% set pathSegments = app.request.pathinfo|split('/') %}
+				{% set CurrentUrl1 = pathSegments[1] ?? '' %}
+				{% set CurrentUrl2 = pathSegments[2] ?? '' %}
+				{% set CurrentUrl3 = pathSegments[3] ?? '' %}
+				<li class="nav-item dropdown {% if CurrentUrl2 == 'rendez-vous' %} active {% endif %}">
+					<a class="nav-link dropdown-toggle {% if CurrentUrl2 == 'rendez-vous' %} show {% endif %}" href="#navbar-base" data-bs-toggle="dropdown" data-bs-auto-close="false" role="button" {% if CurrentUrl2 == 'rendez-vous' %} aria-expanded="true" {% endif %}>
+						<span
+							class="nav-link-icon d-md-none d-lg-inline-block">
+							<!-- Download SVG icon from http://tabler-icons.io/i/package -->
+							<svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewbox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 3l8 4.5l0 9l-8 4.5l-8 -4.5l0 -9l8 -4.5"/><path d="M12 12l8 -4.5"/><path d="M12 12l0 9"/><path d="M12 12l-8 -4.5"/><path d="M16 5.25l-8 4.5"/></svg>
+						</span>
+						<span class="nav-link-title">
+							Rendez-vous
+						</span>
+					</a>
+					<div class="dropdown-menu {% if CurrentUrl2 == 'rendez-vous' %} show {% endif %}">
+						<div class="dropdown-menu-columns">
+							<div class="dropdown-menu-column">
+								<a class="dropdown-item {% if CurrentUrl2 == 'rendez-vous' and CurrentUrl3 == 'listing' %} active {% endif %}" href="{{path('app_etudiant_rdv_listing')}}">
+									Listing
+								</a>
+							</div>
+						</div>
+					</div>
+				</li>
+			{% endif %}
+		</ul>
 	</div>
-</aside>
+</div></aside>

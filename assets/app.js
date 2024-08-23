@@ -109,8 +109,8 @@ const Toast = Swal.mixin({
 global.Toast = Toast;
 const swalWithBootstrapButtons = Swal.mixin({
   customClass: {
-    confirmButton: "btn btn-white mr-2 btn sySweetStyle",
-    cancelButton: "btn btn-warning btn sySweetStyle",
+    confirmButton: "btn btn-danger mr-2 btn sySweetStyle",
+    cancelButton: "btn btn-secondary btn sySweetStyle",
   },
   buttonsStyling: false,
 });

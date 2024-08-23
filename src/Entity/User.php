@@ -54,19 +54,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToOne(inversedBy: 'user')]
     private ?TEtudiant $etudiant = null;
 
-    /**
-     * @var Collection<int, UserActivity>
-     */
-    #[ORM\OneToMany(targetEntity: UserActivity::class, mappedBy: 'User')]
-    private Collection $userActivities;
-
-
-
-    public function __construct()
-    {
-        $this->operations = new ArrayCollection();
-    }
-
     public function getId(): ?int
     {
         return $this->id;
@@ -211,36 +198,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setEtudiant(?TEtudiant $etudiant): static
     {
         $this->etudiant = $etudiant;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, UserActivity>
-     */
-    public function getUserActivities(): Collection
-    {
-        return $this->userActivities;
-    }
-
-    public function addUserActivity(UserActivity $userActivity): static
-    {
-        if (!$this->userActivities->contains($userActivity)) {
-            $this->userActivities->add($userActivity);
-            $userActivity->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeUserActivity(UserActivity $userActivity): static
-    {
-        if ($this->userActivities->removeElement($userActivity)) {
-            // set the owning side to null (unless already changed)
-            if ($userActivity->getUser() === $this) {
-                $userActivity->setUser(null);
-            }
-        }
 
         return $this;
     }
