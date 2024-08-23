@@ -146,7 +146,7 @@ class SyncController extends AbstractController
         // dd(ini_get('max_execution_time'));
         // $this->em->getRepository(TInscription::class)->getInscritsByCurrentYear();
         // $inscriptions = $this->em->getRepository(TInscription::class)->findBy(['statut'=>13]);
-        $inscriptions = $this->em->getRepository(TInscription::class)->getEtudiantInscrits();
+        $inscriptions = $this->em->getRepository(TInscription::class)->getEtudiantInscritsDentaire();
 
         // dd($inscriptions);
         $newRow = 0;

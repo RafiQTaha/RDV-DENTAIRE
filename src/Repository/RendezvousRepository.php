@@ -60,9 +60,9 @@ class RendezvousRepository extends ServiceEntityRepository
                 ->setParameter('endDate', $endDate->format('Y-m-d') . ' 00:00:00');
         }
 
-        return $qb->getQuery()->getResult();
+        // return $qb->getQuery()->getResult();
 
-        $qb->andWhere('r.Annuler == 0');
+        $qb->andWhere('r.Annuler = 0');
 
         return $qb->getQuery()->getResult();
     }

@@ -1,40 +1,3 @@
-{# {% extends 'base.html.twig' %}
-
-{% block title %}Log in!{% endblock %}
-
-{% block body %}
-<form method="post">
-    {% if error %}
-        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
-
-    {% if app.user %}
-        <div class="mb-3">
-            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
-        </div>
-    {% endif %}
-
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label for="inputUsername">Username</label>
-    <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" autocomplete="username" required autofocus>
-    <label for="inputPassword">Password</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
-
-    <input type="hidden" name="_csrf_token"
-           value="{{ csrf_token('authenticate') }}"
-    >
-
-    <div class="checkbox mb-3">
-        <label>
-            <input type="checkbox" name="_remember_me"> Remember me
-        </label>
-    </div>
-
-    <button class="btn btn-lg btn-primary" type="submit">
-        Sign in
-    </button>
-</form>
-{% endblock %} #}
 <!doctype html>
 <html lang="en">
 	<head>
@@ -52,59 +15,44 @@
 			{{ encore_entry_script_tags('app') }}
 		{% endblock %}
 	</head>
-	<body class=" d-flex flex-column">
-		<script src="./dist/js/demo-theme.min.js?1692870487"></script>
-		<div class="page page-center">
-			<div class="container container-tight py-4">
-				<div class="text-center mb-4">
-					<a
-						href="." class="navbar-brand navbar-brand-autodark">
-						{# <img src="./static/logo.svg" width="110" height="32" alt="Tabler" class="navbar-brand-image"> #}
-						RDVDENTAIRE
-					</a>
-				</div>
-				<div class="card card-md">
-					<div class="card-body">
-						<h2 class="h2 text-center mb-4">Login to your account</h2>
-						<form method="post" autocomplete="off" novalidate>
-							{% if error %}
-								<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-							{% endif %}
-							<div class="mb-3">
-								<label class="form-label">Username</label>
-								<input type="text" name="username" required id="inputUsername" class="form-control" placeholder="username" autocomplete="off">
-							</div>
-							<div class="mb-2">
-								<label class="form-label">
-									Password
-									<span class="form-label-description">
-										<a href="{{path('forgot_password')}}">I forgot password</a>
-									</span>
-								</label>
-								<div class="input-group input-group-flat">
-									<input type="password" name="password" id="inputPassword" require class="form-control" placeholder="Your password" autocomplete="off">
-									<span class="input-group-text">
-										<a
-											href="#" class="link-secondary" id="showPassword" title="Show password" data-bs-toggle="tooltip">
-											<!-- Download SVG icon from http://tabler-icons.io/i/eye -->
-											<svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewbox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"/><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6"/></svg>
-										</a>
-									</span>
-								</div>
-							</div>
-							<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-							<div class="mb-2">
-								<label class="form-check">
-									<input type="checkbox" class="form-check-input"/>
-									<span class="form-check-label">Remember me on this device</span>
-								</label>
-							</div>
-							<div class="form-footer">
-								<button type="submit" class="btn btn-primary w-100">Sign in</button>
-							</div>
-						</form>
+	<body class=" d-flex flex-column"></body>
+	<body class=" d-flex flex-column bg-white">
+		<div class="row g-0 flex-fill">
+			<div class="col-12 col-lg-6 col-xl-4 border-top-wide border-vk d-flex flex-column justify-content-center" style="background: #0000002e;">
+				<div class="container container-tight my-5 px-lg-5">
+					<div class="text-center mb-4">
+						<a href="." class="navbar-brand navbar-brand-autodark"><img src="static/logo_black.png" style=" width: 150px; margin: 0 auto;filter: invert(1);" alt=""></a>
 					</div>
+					<form method="post" autocomplete="off" novalidate style="background: #00000040;padding: 15px; border-radius: 8px">
+						{% if error %}
+							<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+						{% endif %}
+						<div class="mb-2">
+							<label class="form-label" style="color: #fff;">Utilisateur</label>
+							<input type="text" name="username" required id="inputUsername" class="form-control" placeholder="Utilisateur" autocomplete="off">
+						</div>
+						<div class="mb-2">
+							<label class="form-label" style="color: #fff;">
+								Mot de passe
+							</label>
+							<div class="input-group input-group-flat">
+								<input type="password" name="password" id="inputPassword" require class="form-control" placeholder="Mot de passe" autocomplete="off">
+								<span class="input-group-text">
+									<a href="#" class="link-secondary" id="showPassword" title="Show password" data-bs-toggle="tooltip">
+										<svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewbox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"/><path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6"/></svg>
+									</a>
+								</span>
+							</div>
+						</div>
+						<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+						<div class="form-footer">
+							<button type="submit" class="btn btn-vk w-100">Connexion</button>
+						</div>
+					</form>
 				</div>
+			</div>
+			<div class="" style="position: absolute;z-index: -1;">
+				<div class="bg-cover h-100 min-vh-100" style="background-image: url(static/evasym_background.jpeg)"></div>
 			</div>
 		</div>
 	</body>
