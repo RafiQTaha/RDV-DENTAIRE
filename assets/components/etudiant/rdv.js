@@ -55,6 +55,8 @@ $(document).ready(function () {
     $('body').on('click', '.ajouterRdv', async function (e) {
         e.preventDefault();
         $("#rdvForm")[0].reset();
+        $('body #actTableBody').empty();
+        $("#actSelect option").prop('disabled', false);
         $('#rdv_new').modal("show")
     })
 
@@ -85,7 +87,7 @@ $(document).ready(function () {
             await notyf.dismissAll();
             $("#rdvForm")[0].reset();
             $("#rdv_new").modal("hide")
-            // window.table.ajax.reload();
+            table.ajax.reload();
             notyf.success(response);
         } catch (error) {
             console.log(error);
@@ -145,6 +147,7 @@ $(document).ready(function () {
             },
             {
                 targets: 5,
+                orderable: false,
                 render: function (data, type, full, meta) {
                     if (data) {
                         return `<span id="truncated-text" title="${data}">${data.length > 40 ? data.substring(0, 40) + "..." : data}</span>`;

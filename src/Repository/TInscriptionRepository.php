@@ -34,6 +34,23 @@ class TInscriptionRepository extends ServiceEntityRepository
         // dd($return);
     }
 
+    public function getEtudiantInscritsDentaire()
+    {
+        return $this->createQueryBuilder('t')
+            ->innerJoin("t.statut", "statut")
+            ->innerJoin("t.annee", "annee")
+            ->innerJoin("t.promotion", "promotion")
+            ->Where("statut.id = 13")
+            ->andWhere("promotion.id in (11,12,13)")
+            ->andWhere("annee.validation_academique = 'non'")
+            // ->andWhere("t.id >= 20000")
+            ->groupBy("t.admission")
+            ->getQuery()
+            ->getResult()
+        ;
+        // dd($return);
+    }
+
 
     public function getNiveauByPromoAnnee($promotion, $annee)
     {
@@ -68,7 +85,7 @@ class TInscriptionRepository extends ServiceEntityRepository
                 ->setParameter('startDate', $startDate->format('Y-m-d') . ' 00:00:00')
                 ->setParameter('endDate', $endDate->format('Y-m-d') . ' 00:00:00');
         }
-        $qb->andWhere('r.Annuler == 0');
+        $qb->andWhere('r.Annuler = 0');
         return $qb->getQuery()->getResult();
     }
 }
