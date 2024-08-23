@@ -43,6 +43,12 @@ class Rendezvous
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $cin = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $Annuler = false;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $annulated = null;
+
     public function __construct()
     {
         $this->Actes = new ArrayCollection();
@@ -157,6 +163,30 @@ class Rendezvous
     public function setCin(?string $cin): static
     {
         $this->cin = $cin;
+
+        return $this;
+    }
+
+    public function isAnnuler(): ?bool
+    {
+        return $this->Annuler;
+    }
+
+    public function setAnnuler(?bool $Annuler): static
+    {
+        $this->Annuler = $Annuler;
+
+        return $this;
+    }
+
+    public function getAnnulated(): ?\DateTimeInterface
+    {
+        return $this->annulated;
+    }
+
+    public function setAnnulated(?\DateTimeInterface $annulated): static
+    {
+        $this->annulated = $annulated;
 
         return $this;
     }

@@ -214,6 +214,13 @@ th {
   border: 0;
 }
 
+.modal-dialog-export .modal-content {
+  position: absolute;
+  top: 0;
+  right: -47%;
+  width: 50%;
+}
+
 // filepond
 .filepond--drop-label {
   color: #4c4e53;
@@ -265,4 +272,21 @@ th {
 
 .file-block:hover i {
   transform: scale(1.2);
+}
+
+.swal2-actions {
+  width: 45% !important;
+  justify-content: space-between !important;
+}
+
+table.custom-striped>tbody>tr:nth-of-type(odd) {
+  background-color: #ffffff;
+}
+
+table.custom-striped>tbody>tr:nth-of-type(even) {
+  background-color: #fcfdfe;
+}
+
+.date-passed {
+  background-color: #ffe6e9 !important;
 }

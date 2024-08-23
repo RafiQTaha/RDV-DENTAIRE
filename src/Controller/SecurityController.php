@@ -11,16 +11,13 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
-use App\Service\UserActivityLogger;
 
 class SecurityController extends AbstractController
 {
     private UserPasswordHasherInterface $passwordEncoder;
-    private $activityLogger;
-    public function __construct(UserPasswordHasherInterface $passwordEncoder, UserActivityLogger $activityLogger)
+    public function __construct(UserPasswordHasherInterface $passwordEncoder)
     {
         $this->passwordEncoder = $passwordEncoder;
-        $this->activityLogger = $activityLogger;
     }
 
     #[Route(path: '/login', name: 'app_login', options: ['expose' => true])]
@@ -66,7 +63,6 @@ class SecurityController extends AbstractController
         ));
 
         $em->flush();
-        $this->activityLogger->log('changement mot de passe', 'app', 'a cahngé son mot de passe.');
         return new JsonResponse("Bien Enregistre!", 200);
     }
 }
