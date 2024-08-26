@@ -49,6 +49,15 @@ class Rendezvous
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $annulated = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $valider = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $validated = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $statut = 'En attente';
+
     public function __construct()
     {
         $this->Actes = new ArrayCollection();
@@ -187,6 +196,42 @@ class Rendezvous
     public function setAnnulated(?\DateTimeInterface $annulated): static
     {
         $this->annulated = $annulated;
+
+        return $this;
+    }
+
+    public function isValider(): ?bool
+    {
+        return $this->valider;
+    }
+
+    public function setValider(?bool $valider): static
+    {
+        $this->valider = $valider;
+
+        return $this;
+    }
+
+    public function getValidated(): ?\DateTimeInterface
+    {
+        return $this->validated;
+    }
+
+    public function setValidated(?\DateTimeInterface $validated): static
+    {
+        $this->validated = $validated;
+
+        return $this;
+    }
+
+    public function getStatut(): ?string
+    {
+        return $this->statut;
+    }
+
+    public function setStatut(?string $statut): static
+    {
+        $this->statut = $statut;
 
         return $this;
     }

@@ -196,6 +196,18 @@ th {
   transform: translate(100%, 0)scale(1);
 }
 
+.table-responsive {
+  overflow: inherit;
+}
+
+.modal-title {
+  font-size: 20px !important;
+}
+
+.hr-text {
+  font-size: 15px !important;
+}
+
 .modal.fade.show .modal-dialog.modal-dialog-slideout {
   -webkit-transform: translate(0, 0);
   transform: translate(0, 0);
@@ -214,10 +226,14 @@ th {
   border: 0;
 }
 
+button {
+  text-transform: uppercase;
+}
+
 .modal-dialog-export .modal-content {
   position: absolute;
   top: 0;
-  right: -47%;
+  right: calc(50% - 25%);
   width: 50%;
 }
 

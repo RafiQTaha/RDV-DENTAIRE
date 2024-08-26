@@ -50,7 +50,7 @@ class RdvController extends AbstractController
         }
 
         $queryBuilder = $this->em->createQueryBuilder()
-            ->select('r.id ,r.Code, r.nom ,r.prenom , r.cin, r.date, r.created, etu.nom as nomEtu, etu.prenom as prenomEtu, adm.code as admCode')
+            ->select('r.id ,r.Code, r.nom ,r.prenom , r.cin, r.date, r.created, etu.nom as nomEtu, etu.prenom as prenomEtu, adm.code as admCode, r.valider')
             ->from(Rendezvous::class, 'r')
             ->leftJoin('r.Actes', 'a')
             ->innerJoin('r.inscription', 'ins')
@@ -60,7 +60,7 @@ class RdvController extends AbstractController
             ->where('r.Annuler = 0')
             ->groupBy('r.id');
         if (!empty($search)) {
-            $queryBuilder->andWhere('(r.Code LIKE :search OR r.nom LIKE :search OR r.prenom LIKE :search OR r.cin LIKE :search OR r.date LIKE :search OR r.created LIKE :search OR a.designation LIKE :search OR etu.nom LIKE :search OR etu.prenom LIKE :search OR adm.code LIKE :search)')
+            $queryBuilder->andWhere('(r.Code LIKE :search OR r.nom LIKE :search OR r.prenom LIKE :search OR r.cin LIKE :search OR r.date LIKE :search OR r.created LIKE :search OR a.designation LIKE :search OR etu.nom LIKE :search OR etu.prenom LIKE :search OR adm.code LIKE :search OR r.statut LIKE :search)')
                 ->setParameter('search', "%$search%");
         }
 
@@ -150,6 +150,7 @@ class RdvController extends AbstractController
         $sheet->setCellValue('I1', 'ACTES');
         $sheet->setCellValue('J1', 'DATE RENDEZ-VOUS');
         $sheet->setCellValue('K1', 'DATE CREATION');
+        $sheet->setCellValue('L1', 'STATUT');
         $i = 2;
         $j = 1;
         foreach ($rendezvous as $rdv) {
@@ -165,6 +166,7 @@ class RdvController extends AbstractController
                 $sheet->setCellValue('I' . $i, $act->getDesignation());
                 $sheet->setCellValue('J' . $i, $rdv->getDate()->format('Y-m-d h:m:s'));
                 $sheet->setCellValue('K' . $i, $rdv->getCreated()->format('Y-m-d h:m:s'));
+                $sheet->setCellValue('L' . $i, $rdv->getStatut());
                 $i++;
             }
             $j++;

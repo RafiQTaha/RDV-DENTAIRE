@@ -96,7 +96,7 @@ $(document).ready(function () {
             notyf.error(message);
         }
     })
-    let filterValue = "all";
+    let filterValue = "today";
     $('.filter-radio').on('change', function () {
         filterValue = $(this).val();
         table.ajax.reload();
@@ -134,6 +134,7 @@ $(document).ready(function () {
             { name: "r.acts", data: "acts" },
             { name: "r.date", data: "date" },
             { name: "r.created", data: "created" },
+            { name: "r.valider", data: "valider" },
             { orderable: false, searchable: false, data: "id" },
         ],
         columnDefs: [
@@ -170,6 +171,16 @@ $(document).ready(function () {
             {
                 targets: 8,
                 render: function (data, type, full, meta) {
+                    if (data == 1) {
+                        return `Validé`;
+                    } else {
+                        return `En attente`;
+                    }
+                },
+            },
+            {
+                targets: 9,
+                render: function (data, type, full, meta) {
                     return `
                         <div class="dropdown" style="">
                             <svg class="icon" fill="black" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -179,6 +190,7 @@ $(document).ready(function () {
                             </svg>
                             <div class="actions dropdown-menu dashboard-dropdown dropdown-menu-center mt-2 py-1">
                                 <a href="#" data-id="${full.id}" class="dropdown-item detailsRdv"><i class="fa fa-eye"></i>&nbsp; Détails</a>
+                                <a href="#" data-id="${full.id}" class="dropdown-item validerRdv"><i class="fa fa-check"></i>&nbsp; Valider</a>
                                 <a href="#" data-id="${full.id}" class="dropdown-item annulerRdv"><i class="fa-solid fa-xmark"></i>&nbsp; Annuler</a>
                             </div>
                         </div>
@@ -259,6 +271,52 @@ $(document).ready(function () {
                 formData.append('rendezvous', id_rdv);
                 try {
                     const request = await axios.post(Routing.generate('app_etudiant_rdv_listing_annuler'), formData);
+                    const response = request.data;
+
+                    window.notyf.dismissAll();
+                    window.notyf.success(response);
+                    table.ajax.reload()
+
+                } catch (error) {
+                    // icon.addClass('fa-unlock').removeClass("fa-spinner fa-spin ");
+                    console.log(error);
+                    const message = error.response.data;
+                    window.notyf.dismissAll();
+                    window.notyf.error(message);
+                }
+
+            }
+        })
+    })
+    $('body').on('click', '.validerRdv', async function (e) {
+        e.preventDefault();
+        let id_rdv = $(this).attr('data-id');
+        swalWithBootstrapButtons.fire({
+            showClass: {
+                popup: 'animatedSwal flipInX faster'
+            },
+            position: 'top',
+            title: "Confirmation ?",
+            text: "Voulez vous vraiment valider ce rendez-vous ?",
+            type: "warning",
+            showCancelButton: true,
+            focusConfirm: true,
+            showCloseButton: true,
+            confirmButtonText: "<i class='fa fa-check'></i> Oui!",
+            cancelButtonText: "<i class='fa fa-times'></i> Non, Annuler!",
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                window.notyf.open({
+                    type: "info",
+                    message: "En cours...",
+                    duration: 9000000,
+                    dismissible: false
+                });
+
+                var formData = new FormData();
+                formData.append('rendezvous', id_rdv);
+                try {
+                    const request = await axios.post(Routing.generate('app_etudiant_rdv_listing_valider'), formData);
                     const response = request.data;
 
                     window.notyf.dismissAll();

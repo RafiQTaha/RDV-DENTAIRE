@@ -9,7 +9,7 @@ $(document).ready(function () {
         $("#list_rendezvous").DataTable().clear().destroy();
     }
 
-    let filterValue = "all";
+    let filterValue = "today";
     $('.filter-radio').on('change', function () {
         filterValue = $(this).val();
         table.ajax.reload();
@@ -48,6 +48,7 @@ $(document).ready(function () {
             { name: "r.acts", data: "acts" },
             { name: "r.date", data: "date" },
             { name: "r.created", data: "created" },
+            { name: "r.valider", data: "valider" },
             { orderable: false, searchable: false, data: "id" },
         ],
         columnDefs: [
@@ -96,6 +97,16 @@ $(document).ready(function () {
             },
             {
                 targets: 9,
+                render: function (data, type, full, meta) {
+                    if (data == 1) {
+                        return `Validé`;
+                    } else {
+                        return `En attente`;
+                    }
+                },
+            },
+            {
+                targets: 10,
                 render: function (data, type, full, meta) {
                     return `
                         <div class="dropdown" style="">
@@ -147,7 +158,8 @@ $(document).ready(function () {
         }
     })
 
-    $(".export").on("click", () => {
+    $(".export").on("click", (e) => {
+        e.preventDefault();
         $("#export_modal").modal("show");
     });
 
