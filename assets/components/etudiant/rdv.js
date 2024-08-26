@@ -29,7 +29,7 @@ $(document).ready(function () {
         const newRow = `
           <tr data-value="${selectedValue}">
             <td>${selectedText}</td>
-            <td><button class="removeAct"><i class="fa-solid fa-circle-xmark" style="color: #e70146;"></i></button></td>
+            <td><button class="removeAct" title="Supprimer"><i class="fa-solid fa-circle-xmark" style="color: #e70146;"></i></button></td>
           </tr>
         `;
         $('#placeholderRow').remove();
