@@ -52,7 +52,7 @@ class RdvController extends AbstractController
         }
 
         $queryBuilder = $this->em->createQueryBuilder()
-            ->select('r.id ,r.Code, r.nom ,r.prenom , r.cin, r.date, r.created')
+            ->select('r.id ,r.Code, r.nom ,r.prenom , r.cin, r.date, r.created, r.valider')
             ->from(Rendezvous::class, 'r')
             ->leftJoin('r.Actes', 'a')
             ->where('r.inscription = :inscription')
@@ -60,7 +60,7 @@ class RdvController extends AbstractController
             ->setParameter('inscription', $inscription)
             ->groupBy('r.id');
         if (!empty($search)) {
-            $queryBuilder->andWhere('(r.Code LIKE :search OR r.nom LIKE :search OR r.prenom LIKE :search OR r.cin LIKE :search OR r.date LIKE :search OR r.created LIKE :search)')
+            $queryBuilder->andWhere('(r.Code LIKE :search OR r.nom LIKE :search OR r.prenom LIKE :search OR r.cin LIKE :search OR r.date LIKE :search OR r.created LIKE :search OR r.statut LIKE :search)')
                 ->setParameter('search', "%$search%");
         }
 
@@ -178,9 +178,23 @@ class RdvController extends AbstractController
     public function app_etudiant_rdv_listing_annuler(Request $request): Response
     {
         $rendezvous = $this->em->getRepository(Rendezvous::class)->find($request->request->get('rendezvous'));
+        if ($rendezvous->isValider()) {
+            return new JsonResponse("Ce rendez-vous est déja validé.", 500);
+        }
         $rendezvous->setAnnuler(1);
         $rendezvous->setAnnulated(new DateTime('now'));
         $this->em->flush();
         return new JsonResponse("Rendez-vous annulé avec succès.", 200);
+    }
+
+    #[Route('/valider', name: 'app_etudiant_rdv_listing_valider', options: ['expose' => true])]
+    public function app_etudiant_rdv_listing_valider(Request $request): Response
+    {
+        $rendezvous = $this->em->getRepository(Rendezvous::class)->find($request->request->get('rendezvous'));
+        $rendezvous->setValider(1);
+        $rendezvous->setValidated(new DateTime('now'));
+        $rendezvous->setStatut('Validé');
+        $this->em->flush();
+        return new JsonResponse("Rendez-vous validé avec succès.", 200);
     }
 }
